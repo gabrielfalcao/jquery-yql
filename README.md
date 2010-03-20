@@ -1,6 +1,11 @@
 # jQuery YQL
 > Version 0.1
 
+# What is this ?
+
+A simple jQuery plugin that queries Yahoo's YQL, fetch the results
+through JSONP, and calls success callback with the results.
+
 # In a nutshell:
   <script type="text/javascript" src="jquery.yql.js"></script>
   <script type="text/javascript">
