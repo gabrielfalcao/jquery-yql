@@ -1,5 +1,9 @@
 # Changes since latest release:
 
+## version 0.2.1
+
+* Some bug fixes
+
 ## version 0.2
 
 * Now it works with any tables, unless its JSONP support is screwed.

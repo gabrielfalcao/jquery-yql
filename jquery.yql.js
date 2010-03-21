@@ -7,7 +7,7 @@
  *
  * http://www.gnu.org/copyleft/gpl.html
  *
- * Version: 0.2
+ * Version: 0.2.1
  */
 
 (function($){
@@ -17,8 +17,8 @@
                      $.each(
                          params, function (key) {
                              var name = "#{" + key + "}";
-                             var value = this;
-                             if (isNaN(parseInt(value))) {
+                             var value = $.trim(this);
+                             if (!value.match(/^[0-9]+$/)) {
                                  value = '"' + value + '"';
                              }
                              query = query.replace(name, value);
@@ -28,7 +28,6 @@
              },
              yql: function (query) {
                  var $self = this;
-                 var params = {};
                  var successCallback = null;
 
                  if (typeof arguments[1] == 'object') {

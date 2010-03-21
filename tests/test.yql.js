@@ -84,3 +84,43 @@ asyncTest('Querying a community table (github)', function () {
                     });
           });
 
+
+test('It should cast into integer only when is suitable', function() {
+         expect(1);
+
+         $.ajax = function (params){
+             equals(params.data.q, 'SELECT * FROM flickr.photos.search WHERE lat = "-12.55" AND lon = "100.23"');
+         }
+
+         $.yql(
+             "SELECT * FROM flickr.photos.search WHERE lat = #{latitude} AND lon = #{longitude}",
+             {
+                 latitude: "-12.55",
+                 longitude: "100.23",
+             }
+         );
+
+         $.ajax = oldAjax;
+     });
+
+asyncTest('It can fetch lastfm data', function() {
+         expect(1);
+
+         $.yql(
+             "SELECT * FROM lastfm.geo.getevents WHERE api_key=#{key} AND lat=#{latitude} AND long=#{longitude}",
+             {
+                 key: "5a2242815c81e144c48b34716014ec7e",
+                 latitude: "-23.550511",
+                 longitude: "-46.633428"
+             },
+             function (data){
+                 try {
+                     equal(data.query.results.lfm.status, "ok");
+                 }catch (e) {
+                     ok(false, "should not reach here");
+                 }
+                 start();
+             }
+         );
+
+     });
