@@ -1,5 +1,5 @@
 # jQuery YQL
-> Version 0.1
+> Version 0.2
 
 # What is this ?
 

@@ -1,15 +1,13 @@
 module("YQL");
-
+var oldAjax = $.ajax;
 test('It should recover data from a given query', function() {
-         expect(6);
+         expect(5);
 
-         var oldAjax = $.ajax;
          $.ajax = function (params){
              equal(params.url, "http://query.yahooapis.com/v1/public/yql");
              equal(params.dataType, "jsonp", "dataType of the request should be jsonp");
-             equal(params.data.format, "json");
-             equal(params.data.callback, "?");
-             equal(params.data.q, "SELECT * FROM something");
+             equal(params.async, true);
+             same(params.data, {format: "json", callback: "?", q: "SELECT * FROM something", env: 'store://datatables.org/alltableswithkeys'});
              params.success("it should be that huge JSON");
          }
 
@@ -38,7 +36,7 @@ asyncTest('It should fetch the right jsonp from yahoo api', function() {
 
 test('It should replace variables in the query string', function () {
          expect(1);
-         var oldAjax = $.ajax;
+
          $.ajax = function (params) {
              equal(params.data.q, "SELECT * FROM weather.forecast WHERE location=90210");
          };
@@ -54,7 +52,7 @@ test('It should replace variables in the query string', function () {
 
 test('It should replace another variable in the query string', function () {
          expect(1);
-         var oldAjax = $.ajax;
+
          $.ajax = function (params) {
              equal(params.data.q, 'SELECT * FROM woman WHERE hairColor="red"');
          };
@@ -67,3 +65,22 @@ test('It should replace another variable in the query string', function () {
 
          $.ajax = oldAjax;
      });
+
+asyncTest('Querying a yahoo official table (flickr)', function () {
+              expect(3);
+              $.yql("SELECT * FROM flickr.photos.recent", function (data) {
+                        ok(data.query.results.photo.length > 0, "Cool, the result ain't empty")
+                        ok(data.query.results.photo[0].farm, "Has farm info")
+                        ok(data.query.results.photo[0].title, "Has title")
+                        start();
+                    });
+          });
+
+asyncTest('Querying a community table (github)', function () {
+              expect(1);
+              $.yql("SELECT * FROM github.repo WHERE id='gabrielfalcao' AND repo='jquery-yql'", function (data) {
+                        equal(data.query.results.repository.url, "http://github.com/gabrielfalcao/jquery-yql");
+                        start();
+                    });
+          });
+
