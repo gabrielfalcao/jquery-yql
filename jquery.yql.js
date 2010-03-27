@@ -2,8 +2,7 @@
  * jQuery YQL plugin
  *
  * Copyright (c) 2010 Gabriel Falcão
- * Copyright (c) 2010 Lincoln de Sousa
- * Dual licensed under GPL 3+ license.
+ * Licensed under GPL 3+ license.
  *
  * http://www.gnu.org/copyleft/gpl.html
  *
