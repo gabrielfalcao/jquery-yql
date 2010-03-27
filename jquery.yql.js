@@ -17,9 +17,9 @@
                          params, function (key) {
                              var name = "#{" + key + "}";
                              var value = $.trim(this);
-                             if (!value.match(/^[0-9]+$/)) {
+                             /*if (!value.match(/^[0-9]+$/)) {
                                  value = '"' + value + '"';
-                             }
+                             }*/
                              query = query.replace(name, value);
                          }
                      );
