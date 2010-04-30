@@ -3,11 +3,11 @@
  *
  * Copyright (c) 2010 Gabriel Falcão
  * Copyright (c) 2010 Lincoln de Sousa
- * Dual licensed under GPL 3+ license.
+ * licensed under MIT license.
  *
- * http://www.gnu.org/copyleft/gpl.html
+ * http://github.com/gabrielfalcao/jquery-yql/raw/master/license.txt
  *
- * Version: 0.2.1
+ * Version: 0.2.2
  */
 
 (function($){
@@ -30,7 +30,7 @@
                  var $self = this;
                  var successCallback = null;
                  var errorCallback = null;
-                 
+
                  if (typeof arguments[1] == 'object') {
                      query = $self._prepareYQLQuery(query, arguments[1]);
                      successCallback = arguments[2];
