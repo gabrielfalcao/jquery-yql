@@ -28,6 +28,7 @@ through JSONP, and calls success callback with the results.
 # License
 
 > Copyright (C) 2010  Gabriel Falcão <gabriel@nacaolivre.org>
+>
 > Copyright (C) 2010  Lincoln de Sousa <lincoln@comum.org>
 >
 > Permission is hereby granted, free of charge, to any person
