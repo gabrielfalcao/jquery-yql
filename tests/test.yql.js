@@ -124,3 +124,38 @@ asyncTest('It can fetch lastfm data', function() {
          );
 
      });
+
+asyncTest('It can fetch location data by IP address', function() {
+         expect(3);
+
+          $.yql("SELECT * FROM ip.location WHERE ip= #{ip} ", {ip: "72.30.2.43"},
+              function (data) {
+                  var resp = data.query.results.Response;
+                  equal(resp.City, "Sunnyvale");
+                  equal(resp.RegionName, "California");
+                  equal(resp.CountryName, "United States");
+                  start();
+              });
+
+          });
+
+test('It should call the optional error callback when ajax fails', function() {
+    expect(1);
+    
+    $.ajax = function (params) {
+        params.error("error data");
+    }
+
+    $.yql("SELECT * FROM unknown_table WHERE param=#{param} ", {param: "blah"},
+        function (data) {
+            ok(false, "should not reach here");
+            start();
+        },
+        function (error_data) {
+            equal(error_data, "error data");
+            start();
+        }
+    );
+    
+    $.ajax = oldAjax;
+});
