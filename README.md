@@ -29,6 +29,8 @@ through JSONP, and calls success callback with the results.
 
 > Copyright (C) 2010  Gabriel Falcão <gabriel@nacaolivre.org>
 >
+> Copyright (C) 2010  Lincoln de Sousa <lincoln@comum.org>
+>
 > This program is free software: you can redistribute it and/or modify
 > it under the terms of the GNU General Public License as published by
 > the Free Software Foundation, either version 3 of the License, or

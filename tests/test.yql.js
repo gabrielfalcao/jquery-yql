@@ -1,20 +1,3 @@
-/*
- Copyright (C) 2010  Gabriel Falcão <gabriel@nacaolivre.org>
-
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 module("YQL");
 var oldAjax = $.ajax;
 test('It should recover data from a given query', function() {
@@ -141,17 +124,3 @@ asyncTest('It can fetch lastfm data', function() {
          );
 
      });
-
-asyncTest('It can fetch location data by IP address', function() {
-         expect(3);
-
-          $.yql("SELECT * FROM ip.location WHERE ip= #{ip} ", {ip: "72.30.2.43"},
-              function (data) {
-                  var resp = data.query.results.Response;
-                  equal(resp.City, "Sunnyvale");
-                  equal(resp.RegionName, "California");
-                  equal(resp.CountryName, "United States");
-                  start();
-              });
-
-          });
