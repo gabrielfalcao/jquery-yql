@@ -79,7 +79,7 @@ asyncTest('Querying a yahoo official table (flickr)', function () {
 asyncTest('Querying a community table (github)', function () {
               expect(1);
               $.yql("SELECT * FROM github.repo WHERE id='gabrielfalcao' AND repo='jquery-yql'", function (data) {
-                        equal(data.query.results.repository.url, "http://github.com/gabrielfalcao/jquery-yql");
+                        equal(data.query.results.repository.url, "https://github.com/gabrielfalcao/jquery-yql");
                         start();
                     });
           });
@@ -125,19 +125,6 @@ asyncTest('It can fetch lastfm data', function() {
 
      });
 
-asyncTest('It can fetch location data by IP address', function() {
-         expect(3);
-
-          $.yql("SELECT * FROM ip.location WHERE ip= #{ip} ", {ip: "72.30.2.43"},
-              function (data) {
-                  var resp = data.query.results.Response;
-                  equal(resp.City, "Sunnyvale");
-                  equal(resp.RegionName, "California");
-                  equal(resp.CountryName, "United States");
-                  start();
-              });
-
-          });
 
 test('It should call the optional error callback when ajax fails', function() {
     expect(1);
