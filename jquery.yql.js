@@ -21,7 +21,9 @@
                          if (!value.match(/^[0-9]+$/)) {
                              value = '"' + value + '"';
                          }
-                         query = query.replace(name, value);
+                         while (query.search(name) > -1) {
+                             query = query.replace(name, value);
+                         }
                      }
                  );
                  return query;

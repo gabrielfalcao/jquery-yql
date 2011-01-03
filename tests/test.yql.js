@@ -54,11 +54,11 @@ test('It should replace another variable in the query string', function () {
          expect(1);
 
          $.ajax = function (params) {
-             equal(params.data.q, 'SELECT * FROM woman WHERE hairColor="red"');
+             equal(params.data.q, 'SELECT * FROM woman WHERE hairColor="red" AND skinColor="red"');
          };
 
          $.yql(
-             'SELECT * FROM woman WHERE hairColor=#{color}',
+             'SELECT * FROM woman WHERE hairColor=#{color} AND skinColor=#{color}',
              {color: 'red'},
              function (data) { }
          )
@@ -128,7 +128,7 @@ asyncTest('It can fetch lastfm data', function() {
 
 test('It should call the optional error callback when ajax fails', function() {
     expect(1);
-    
+
     $.ajax = function (params) {
         params.error("error data");
     }
@@ -143,6 +143,6 @@ test('It should call the optional error callback when ajax fails', function() {
             start();
         }
     );
-    
+
     $.ajax = oldAjax;
 });
