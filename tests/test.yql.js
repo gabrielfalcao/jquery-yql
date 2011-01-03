@@ -50,7 +50,7 @@ test('It should replace variables in the query string', function () {
          $.ajax = oldAjax;
      });
 
-test('It should replace another variable in the query string', function () {
+test('It should replace another #{variable} in the query string', function () {
          expect(1);
 
          $.ajax = function (params) {
@@ -65,6 +65,22 @@ test('It should replace another variable in the query string', function () {
 
          $.ajax = oldAjax;
      });
+test('It should replace @variables', function () {
+         expect(1);
+
+         $.ajax = function (params) {
+             equal(params.data.q, 'SELECT * FROM woman WHERE hairColor="red" AND skinColor="red" AND age=@age');
+         };
+
+         $.yql(
+             'SELECT * FROM woman WHERE hairColor=@color AND skinColor=@color AND age=@age',
+             {color: 'red'},
+             function (data) { }
+         )
+
+         $.ajax = oldAjax;
+     });
+
 
 asyncTest('Querying a yahoo official table (flickr)', function () {
               expect(3);

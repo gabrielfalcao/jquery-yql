@@ -7,7 +7,7 @@
  *
  * http://github.com/gabrielfalcao/jquery-yql/raw/master/license.txt
  *
- * Version: 0.2.2
+ * Version: 0.3.0
  */
 
 (function($){
@@ -24,6 +24,16 @@
                          while (query.search(name) > -1) {
                              query = query.replace(name, value);
                          }
+
+                         var name = "@" + key;
+                         var value = $.trim(this);
+                         if (!value.match(/^[0-9]+$/)) {
+                             value = '"' + value + '"';
+                         }
+                         while (query.search(name) > -1) {
+                             query = query.replace(name, value);
+                         }
+
                      }
                  );
                  return query;

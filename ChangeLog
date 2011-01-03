@@ -1,0 +1,5 @@
+2011-01-03  Gabriel Falcão  <gabriel@nacaolivre.org>
+
+	* jquery-yql now supports @variable for automatic
+	replacement. It's likely #{variable} but with "@" support.
+

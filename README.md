@@ -1,5 +1,5 @@
 # jQuery YQL
-> Version 0.2.2
+> Version 0.3.0
 
 # What is this ?
 
@@ -11,7 +11,7 @@ through JSONP, and calls success callback with the results.
   <script type="text/javascript">
     $(function(){
       $.yql(
-        "SELECT * FROM github.repo WHERE id='#{username}' AND repo='#{repository}'",
+        "SELECT * FROM github.repo WHERE id=#{username} AND repo=@repository",
         {
           username: "gabrielfalcao",
           repository: "jquery-yql"
@@ -24,6 +24,65 @@ through JSONP, and calls success callback with the results.
       );
      });
   </script>
+
+## Explanation
+
+jquery-yql automatically handles variable replacement within the query.
+
+So if you use a query that looks like this:
+
+    "SELECT * FROM some_yql_table WHERE some_field=#{foo} AND another_field=#{bar}"
+
+with the object:
+
+    {
+        'foo': 'Just a string',
+        'bar': 42
+    }
+
+You don't need to worry about adding quotes to non-numeric fields, for
+example. Because we already do it for you.
+
+Thus, the query above will become this:
+
+    'SELECT * FROM some_yql_table WHERE some_field="Just a string" AND another_field=42'
+
+See ? jquery-yql automatically identifies if the value must be a string or number.
+
+### "@" variables
+
+Because of the ticket [#4](https://github.com/gabrielfalcao/jquery-yql/issues#issue/4) I've added support to `@variable` too.
+So it's not a big deal, just works in the same way of the `#{variable}`.
+
+But allow me show it:
+
+    "SELECT * FROM some_yql_table WHERE some_field=@foo AND another_field=@bar"
+
+becomes:
+
+    'SELECT * FROM some_yql_table WHERE some_field="Just a string" AND another_field=42'
+
+### Last thing
+
+If you left variables without the respective key-value mapping
+*mapped* in the translation `object`, jquery-yql will not touch it.
+
+
+Once again, I show you:
+
+    "SELECT * FROM person WHERE name=@name AND age=#{years} AND wealth=@value'
+
+with
+
+    {
+        'name': 'Gabriel',
+        'years': '22'
+    }
+
+Then, jquery-yql will resolve to:
+
+    'SELECT * FROM person WHERE name="Gabriel" AND age=22 AND wealth=@value'
+
 
 # License
 
